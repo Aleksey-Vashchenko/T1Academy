@@ -1,14 +1,11 @@
-package com.vashchenko.education.t1.task_1.entity;
+package com.vashchenko.education.t1.task_1.model.entity;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Data;
 import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.UuidGenerator;
-
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
@@ -16,6 +13,8 @@ import java.util.UUID;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 @ToString(exclude = "orders")
+@Data
+@Table(name = "pr_users")
 public class User {
 
     @UuidGenerator
