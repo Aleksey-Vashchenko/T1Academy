@@ -52,10 +52,10 @@ public class JpaUserService implements UserService {
     }
 
     @Override
-    public UserDto findUserByName(String name) {
+    public UserDto findUserById(UUID userId) {
         return userMapper.toDto(
-                userRepository.findByName(name).orElseThrow(
-                    () -> new UserIsNotFoundException("name",name)
+                userRepository.findById(userId).orElseThrow(
+                    () -> new UserIsNotFoundException("id",userId)
                 )
         );
     }

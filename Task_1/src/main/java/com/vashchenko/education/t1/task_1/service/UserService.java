@@ -8,6 +8,6 @@ public interface UserService {
     UserDto createUser(UserDto dtoToCreate);
     void updateUser(UserDto dtoToUpdate, UUID id);
     void deleteUserById(UUID userId);
-    UserDto findUserByName(String name);
+    UserDto findUserById(UUID uuid);
     List<UserDto> findAllUsers();
 }
