@@ -1,5 +1,7 @@
 package com.vashchenko.education.t1.task_1.service.dbImpl;
 
+import com.vashchenko.education.t1.task_1.aop.annotation.LogExceptionOnly;
+import com.vashchenko.education.t1.task_1.aop.annotation.LogMethodExecution;
 import com.vashchenko.education.t1.task_1.exception.OrderIsNotFoundException;
 import com.vashchenko.education.t1.task_1.mapper.OrderMapper;
 import com.vashchenko.education.t1.task_1.model.dto.request.OrderDto;
@@ -20,6 +22,7 @@ public class JpaOrderService implements OrderService {
     private final OrderMapper orderMapper;
 
     @Override
+    @LogMethodExecution
     public OrderDto createOrder(OrderDto dtoToCreate, UUID userId) {
         Order orderToCreate =orderMapper.toEntity(dtoToCreate);
         User userOfOrder = new User();
@@ -31,6 +34,7 @@ public class JpaOrderService implements OrderService {
     }
 
     @Override
+    @LogMethodExecution
     public void updateOrder(OrderDto dtoToUpdate, UUID orderId) {
         if(!orderRepository.existsById(orderId)){
             Order updateOrder = orderMapper.toEntity(dtoToUpdate);
@@ -43,6 +47,7 @@ public class JpaOrderService implements OrderService {
     }
 
     @Override
+    @LogExceptionOnly
     public void deleteOrderById(UUID orderId) {
         Order order = orderRepository.findById(orderId).orElseThrow(
                 () -> new OrderIsNotFoundException("id",orderId)
@@ -52,6 +57,7 @@ public class JpaOrderService implements OrderService {
     }
 
     @Override
+    @LogExceptionOnly
     public OrderDto findOrderById(UUID orderId) {
         return orderMapper.toDto(
                 orderRepository.findById(orderId).orElseThrow(
@@ -61,6 +67,7 @@ public class JpaOrderService implements OrderService {
     }
 
     @Override
+    @LogExceptionOnly
     public List<OrderDto> findAllOrdersByUserId(UUID userId) {
         return orderMapper.toDtoList(
                 orderRepository.findByUser_Id(userId)

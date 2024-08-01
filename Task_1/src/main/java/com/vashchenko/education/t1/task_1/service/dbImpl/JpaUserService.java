@@ -1,5 +1,7 @@
 package com.vashchenko.education.t1.task_1.service.dbImpl;
 
+import com.vashchenko.education.t1.task_1.aop.annotation.LogExceptionOnly;
+import com.vashchenko.education.t1.task_1.aop.annotation.LogMethodExecution;
 import com.vashchenko.education.t1.task_1.exception.UserAlreadyExistsException;
 import com.vashchenko.education.t1.task_1.exception.UserIsNotFoundException;
 import com.vashchenko.education.t1.task_1.mapper.UserMapper;
@@ -19,6 +21,7 @@ public class JpaUserService implements UserService {
     private final UserMapper userMapper;
 
     @Override
+    @LogMethodExecution
     public UserDto createUser(UserDto dtoToCreate) {
         if(userRepository.findByEmailIgnoreCase(dtoToCreate.email()).isEmpty()){
             User updateUser = userMapper.toEntity(dtoToCreate);
@@ -30,6 +33,7 @@ public class JpaUserService implements UserService {
     }
 
     @Override
+    @LogMethodExecution
     public void updateUser(UserDto dtoToUpdate, UUID userId) {
         if(userRepository.existsById(userId)){
             User updateUser = userMapper.toEntity(dtoToUpdate);
@@ -42,6 +46,7 @@ public class JpaUserService implements UserService {
     }
 
     @Override
+    @LogExceptionOnly
     public void deleteUserById(UUID userId) {
         User user = userRepository.findById(userId).orElseThrow(
                 () -> new UserIsNotFoundException("id",userId)
@@ -51,6 +56,7 @@ public class JpaUserService implements UserService {
     }
 
     @Override
+    @LogExceptionOnly
     public UserDto findUserById(UUID userId) {
         return userMapper.toDto(
                 userRepository.findById(userId).orElseThrow(
@@ -60,6 +66,7 @@ public class JpaUserService implements UserService {
     }
 
     @Override
+    @LogExceptionOnly
     public List<UserDto> findAllUsers() {
         return userMapper.toDtoList(userRepository.findAll());
     }
