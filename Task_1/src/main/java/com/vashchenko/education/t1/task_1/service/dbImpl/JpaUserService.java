@@ -9,7 +9,6 @@ import com.vashchenko.education.t1.task_1.repository.UserRepository;
 import com.vashchenko.education.t1.task_1.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.UUID;
 
@@ -21,7 +20,7 @@ public class JpaUserService implements UserService {
 
     @Override
     public UserDto createUser(UserDto dtoToCreate) {
-        if(!userRepository.existsByEmailIgnoreCase(dtoToCreate.email())){
+        if(userRepository.findByEmailIgnoreCase(dtoToCreate.email()).isEmpty()){
             User updateUser = userMapper.toEntity(dtoToCreate);
             return userMapper.toDto(userRepository.save(updateUser));
         }
@@ -32,7 +31,7 @@ public class JpaUserService implements UserService {
 
     @Override
     public void updateUser(UserDto dtoToUpdate, UUID userId) {
-        if(!userRepository.existsById(userId)){
+        if(userRepository.existsById(userId)){
             User updateUser = userMapper.toEntity(dtoToUpdate);
             updateUser.setId(userId);
             userRepository.save(updateUser);

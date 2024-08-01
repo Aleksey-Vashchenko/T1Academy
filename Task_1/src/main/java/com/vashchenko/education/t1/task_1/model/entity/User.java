@@ -5,6 +5,7 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.ToString;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.UuidGenerator;
 import java.util.Objects;
 import java.util.Set;
@@ -15,15 +16,17 @@ import java.util.UUID;
 @ToString(exclude = "orders")
 @Data
 @Table(name = "pr_users")
+@DynamicUpdate
 public class User {
 
     @UuidGenerator
     @Id
+    @Column(updatable = false)
     UUID id;
     String name;
     String email;
 
-    @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "user", orphanRemoval = false)
     Set<Order> orders;
 
 
