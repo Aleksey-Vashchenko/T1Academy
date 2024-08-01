@@ -1,7 +1,9 @@
-package com.vashchenko.education.t1.task_1.entity;
+package com.vashchenko.education.t1.task_1.model.entity;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Data;
+import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.UuidGenerator;
 
@@ -10,12 +12,17 @@ import java.util.UUID;
 
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@Data
+@ToString(exclude = "user")
+@Table(name = "orders")
 public class Order {
     @UuidGenerator
     @Id
+    @Column(updatable = false)
     UUID id;
     String description;
-    String status;
+    @Enumerated(EnumType.STRING)
+    OrderStatus status;
 
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
