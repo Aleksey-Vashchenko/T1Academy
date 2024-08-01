@@ -26,7 +26,7 @@ public class User {
     String name;
     String email;
 
-    @OneToMany(mappedBy = "user", orphanRemoval = false)
+    @OneToMany(mappedBy = "user", orphanRemoval = false, cascade = CascadeType.REMOVE)
     Set<Order> orders;
 
 
