@@ -19,6 +19,7 @@ public class ApiResponseAspect {
     public void restControllerMethods() {}
 
     @Around("restControllerMethods()")
+    //TODO: узнать почему не работает @AfterReturning
     public Object wrapResponse(ProceedingJoinPoint joinPoint) throws Throwable {
         Object result = joinPoint.proceed();
         HttpStatus httpStatus = HttpStatus.OK;
