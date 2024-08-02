@@ -42,11 +42,8 @@ public class ApiResponse<T> {
         errorMessages.add(errorMessage);
     }
 
-    public void addError(List<ExtraErrorMessage> messages){
+    public void addErrors(List<ExtraErrorMessage> messages){
         errorMessages.addAll(messages);
     }
 
-    public void setError(String error) {
-        this.error = error;
-    }
 }
