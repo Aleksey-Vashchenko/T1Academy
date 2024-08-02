@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="WARN">
+<Configuration status="info">
     <Appenders>
         <Console name="ConsoleAppAppender" target="SYSTEM_OUT">
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} [%pid] - %msg%n" />
         </Console>
 
-        <RollingFile name="ServiceAppender" fileName="logs/aop-annotations.log" append="true"
+        <RollingFile name="ServiceAppender" fileName="task1-logs/aop-annotations.log" append="true"
                      filePattern="logs/aop-logs-%d{yyyy-MM-dd}-%i.log.gz">
             <Policies>
                 <SizeBasedTriggeringPolicy size="19MB" />
@@ -14,7 +14,7 @@
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} [%pid] - %msg%n" />
         </RollingFile>
 
-        <File name="FileAppAppender" fileName="logs/application.log" append="true">
+        <File name="FileAppAppender" fileName="task1-logs/application.log" append="true">
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} [%pid] - %msg%n" />
         </File>
     </Appenders>
