@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public interface OrderService {
 
-    OrderDto createOrder(OrderDto dtoToCreate, UUID userId);
+    OrderDto createOrder(OrderDto dtoToCreate);
     void updateOrder(OrderDto dtoToUpdate, UUID id);
     void deleteOrderById(UUID orderId);
     OrderDto findOrderById(UUID orderId);

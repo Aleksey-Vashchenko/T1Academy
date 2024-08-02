@@ -35,7 +35,7 @@ public class JpaUserService implements UserService {
     @Override
     @LogMethodExecution
     public void updateUser(UserDto dtoToUpdate, UUID userId) {
-        if(userRepository.existsById(userId)){
+        if(ifUserExistsById(userId)){
             User updateUser = userMapper.toEntity(dtoToUpdate);
             updateUser.setId(userId);
             userRepository.save(updateUser);
@@ -69,5 +69,9 @@ public class JpaUserService implements UserService {
     @LogExceptionOnly
     public List<UserDto> findAllUsers() {
         return userMapper.toDtoList(userRepository.findAll());
+    }
+
+    boolean ifUserExistsById(UUID userId){
+        return userRepository.existsById(userId);
     }
 }

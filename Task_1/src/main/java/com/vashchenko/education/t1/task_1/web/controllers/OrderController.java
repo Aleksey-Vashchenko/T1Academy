@@ -9,21 +9,20 @@ import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/v1/users/{userId}/orders")
+@RequestMapping("api/v1/orders")
 public class OrderController {
 
     private final OrderService orderService;
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    Object createOrder(@PathVariable UUID userId,
-                        @RequestBody OrderDto orderDto){
-        return orderService.createOrder(orderDto,userId);
+    Object createOrder(@RequestBody OrderDto createOrderDto){
+        return orderService.createOrder(createOrderDto);
     }
 
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
-    Object getUserOrders(@PathVariable UUID userId){
+    Object getUserOrders(@RequestParam("userId") UUID userId){
         return orderService.findAllOrdersByUserId(userId);
     }
 

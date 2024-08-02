@@ -3,6 +3,7 @@ package com.vashchenko.education.t1.task_1.service.dbImpl;
 import com.vashchenko.education.t1.task_1.aop.annotation.LogExceptionOnly;
 import com.vashchenko.education.t1.task_1.aop.annotation.LogMethodExecution;
 import com.vashchenko.education.t1.task_1.exception.OrderIsNotFoundException;
+import com.vashchenko.education.t1.task_1.exception.UserIsNotFoundException;
 import com.vashchenko.education.t1.task_1.mapper.OrderMapper;
 import com.vashchenko.education.t1.task_1.model.dto.request.OrderDto;
 import com.vashchenko.education.t1.task_1.model.entity.Order;
@@ -20,17 +21,24 @@ import java.util.UUID;
 public class JpaOrderService implements OrderService {
     private final OrderRepository orderRepository;
     private final OrderMapper orderMapper;
+    private final JpaUserService userService;
 
     @Override
     @LogMethodExecution
-    public OrderDto createOrder(OrderDto dtoToCreate, UUID userId) {
-        Order orderToCreate =orderMapper.toEntity(dtoToCreate);
-        User userOfOrder = new User();
-        userOfOrder.setId(userId);
-        orderToCreate.setUser(userOfOrder);
-        return orderMapper.toDto(
-                orderRepository.save(orderToCreate)
-        );
+    public OrderDto createOrder(OrderDto dtoToCreate) {
+        UUID userId = dtoToCreate.userId();
+        if(userService.ifUserExistsById(userId)){
+            Order orderToCreate =orderMapper.toEntity(dtoToCreate);
+            User userOfOrder = new User();
+            userOfOrder.setId(userId);
+            orderToCreate.setUser(userOfOrder);
+            return orderMapper.toDto(
+                    orderRepository.save(orderToCreate)
+            );
+        }
+        else {
+            throw new UserIsNotFoundException("id",userId);
+        }
     }
 
     @Override
@@ -69,8 +77,13 @@ public class JpaOrderService implements OrderService {
     @Override
     @LogExceptionOnly
     public List<OrderDto> findAllOrdersByUserId(UUID userId) {
-        return orderMapper.toDtoList(
-                orderRepository.findByUser_Id(userId)
-        );
+        if(userService.ifUserExistsById(userId)){
+            return orderMapper.toDtoList(
+                    orderRepository.findByUser_Id(userId)
+            );
+        }
+        else {
+            throw new UserIsNotFoundException("id",userId);
+        }
     }
 }
