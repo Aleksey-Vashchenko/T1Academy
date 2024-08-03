@@ -35,14 +35,10 @@ public class JpaUserService implements UserService {
     @Override
     @LogMethodExecution
     public void updateUser(UserDto dtoToUpdate, UUID userId) {
-        if(ifUserExistsById(userId)){
-            User updateUser = userMapper.toEntity(dtoToUpdate);
-            updateUser.setId(userId);
-            userRepository.save(updateUser);
-        }
-        else {
-            throw new UserIsNotFoundException("id",userId);
-        }
+        UserDto userDto = findUserById(userId);
+        User user = userMapper.toEntity(userDto);
+        user.setName(dtoToUpdate.name());
+        userRepository.save(user);
     }
 
     @Override
