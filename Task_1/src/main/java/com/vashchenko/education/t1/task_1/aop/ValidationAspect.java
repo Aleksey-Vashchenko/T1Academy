@@ -23,7 +23,7 @@ public class ValidationAspect {
     @Before("restControllerMethodsWithOrderDto()")
     public void checkOrderType(JoinPoint joinPoint) throws IllegalAccessException {
         for (Object arg : joinPoint.getArgs()) {
-            if (arg != null && arg.getClass().equals(OrderDto.class)) {
+            if (arg != null) {
                 Field[] fields = arg.getClass().getDeclaredFields();
                 for (Field field : fields) {
                     if (field.isAnnotationPresent(OrderType.class)) {

@@ -2,7 +2,6 @@ package com.vashchenko.education.t1.task_1.aop;
 
 import com.vashchenko.education.t1.task_1.exception.BaseConflictException;
 import lombok.extern.log4j.Log4j2;
-import org.apache.logging.log4j.ThreadContext;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
