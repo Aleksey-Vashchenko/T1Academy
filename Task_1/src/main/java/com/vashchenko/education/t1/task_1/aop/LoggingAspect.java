@@ -1,6 +1,7 @@
 package com.vashchenko.education.t1.task_1.aop;
 
 import com.vashchenko.education.t1.task_1.exception.BaseConflictException;
+import com.vashchenko.education.t1.task_1.exception.BaseException;
 import lombok.extern.log4j.Log4j2;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -30,9 +31,15 @@ public class LoggingAspect {
             log.info("Method {}.{} returned with result: {}", className, methodName, result);
             return result;
         } catch (Exception ex) {
-            if(isNeedToLogin(ex)){
+            if(ex instanceof BaseException){
+                if(isNeedToLogin(ex)){
+                    log.error("Exception in method {}.{} with arguments {}. Exception: {}",
+                            className, methodName, args, ex.getMessage());
+                }
+            }
+            else {
                 log.error("Exception in method {}.{} with arguments {}. Exception: {}",
-                        className, methodName, args, ex.getMessage(), ex);
+                        className, methodName, args, ex.getMessage(),ex);
             }
             throw ex;
         }
@@ -48,7 +55,7 @@ public class LoggingAspect {
         Object[] args = joinPoint.getArgs();
         if(isNeedToLogin(ex)){
             log.error("Exception in method {}.{} with arguments {}. Exception: {}",
-                    className, methodName, args, ex.getMessage(), ex);
+                    className, methodName, args, ex.getMessage());
         }
     }
 
