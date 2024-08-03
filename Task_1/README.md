@@ -38,10 +38,11 @@ Log4j2 сконфигурирован так, что логи от ValidationAsp
 
 
 ## Инструкция по запуску
-- Запуск через Docker 
+- Запуск через docker-compose 
 ```bash sh
 docker-compose up --build
 ```
+или можете включить в свой compose файл данный [образ](https://hub.docker.com/repository/docker/alekseyvashchenko/t1_task_1) 
 - Запуск, если установлен PostgreSQL, передав нужные параметры для подключения к бд
 
 Сборка проекта в jar файл
