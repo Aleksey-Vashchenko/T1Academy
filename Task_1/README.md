@@ -54,4 +54,5 @@ docker-compose up --build
 java -jar ./target/Task_1-0.0.1-SNAPSHOT.jar --spring.datasource.url=jdbc:postgresql://localhost:5432/postgres --spring.datasource.username=test --spring.datasource.password=test --spring.jpa.properties.hibernate.default_schema=public
 ```
 
+Коллекция запросов Postman [T1 academy.postman_collection.json](T1%20academy.postman_collection.json)
 
