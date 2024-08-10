@@ -2,7 +2,7 @@ package com.vashchenko.education.t1.task_1.aop;
 
 import com.vashchenko.education.t1.task_1.exception.BaseConflictException;
 import com.vashchenko.education.t1.task_1.exception.BaseException;
-import lombok.extern.log4j.Log4j2;
+import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
@@ -13,8 +13,9 @@ import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
-@Log4j2
 public class LoggingAspect {
+
+    static org.apache.logging.log4j.Logger log = org.apache.logging.log4j.LogManager.getLogger(LoggingAspect.class);
     @Pointcut("@annotation(com.vashchenko.education.t1.task_1.aop.annotation.LogMethodExecution)")
     public void needLoggingMethod() {}
 
