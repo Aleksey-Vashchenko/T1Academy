@@ -6,7 +6,10 @@ target/
 ### IntelliJ IDEA ###
 .idea/modules.xml
 .idea/*
-
+task1-logs
+task1-logs/*
+task2-logs
+task2-logs/*
 .idea/jarRepositories.xml
 .idea/compiler.xml
 .idea/libraries/

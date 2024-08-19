@@ -1,0 +1,103 @@
+{
+  "groups": [
+    {
+      "name": "vashchenko.logging",
+      "type": "com.vashchenko.education.t1.task2.configuration.properties.LoggingProperties",
+      "sourceType": "com.vashchenko.education.t1.task2.configuration.properties.LoggingProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "vashchenko.logging.enabled",
+      "type": "java.lang.Boolean",
+      "defaultValue": false,
+      "description": "Enable or disable logging."
+    },
+    {
+      "name": "vashchenko.logging.includeIncomingHeaders",
+      "type": "java.lang.Boolean",
+      "defaultValue": false,
+      "description": "Include incoming headers in logs."
+    },
+    {
+      "name": "vashchenko.logging.includeOutgoingHeaders",
+      "type": "java.lang.Boolean",
+      "defaultValue": false,
+      "description": "Include outgoing headers in logs."
+    },
+    {
+      "name": "vashchenko.logging.includeRequestBody",
+      "type": "java.lang.Boolean",
+      "defaultValue": false,
+      "description": "Include request body in logs."
+    },
+    {
+      "name": "vashchenko.logging.includeResponseBody",
+      "type": "java.lang.Boolean",
+      "defaultValue": false,
+      "description": "Include response body in logs."
+    },
+    {
+      "name": "vashchenko.logging.ignored-urls",
+      "type": "java.util.List<java.lang.String>",
+      "description": "List of URL patterns to ignore for logging."
+    }
+  ],
+  "hints": [
+    {
+      "name": "vashchenko.logging.enabled",
+      "values": [
+        {
+          "value": "true"
+        },
+        {
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "name": "vashchenko.logging.include-incoming-headers",
+      "values": [
+        {
+          "value": "true"
+        },
+        {
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "name": "vashchenko.logging.include-outgoing-headers",
+      "values": [
+        {
+          "value": "true"
+        },
+        {
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "name": "vashchenko.logging.include-request-body",
+      "values": [
+        {
+          "value": "true"
+        },
+        {
+          "value": "false"
+        }
+      ]
+    },
+    {
+      "name": "vashchenko.logging.include-response-body",
+      "values": [
+        {
+          "value": "true"
+        },
+        {
+          "value": "false"
+        }
+      ]
+    }
+  ]
+}
