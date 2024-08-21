@@ -22,7 +22,6 @@ import java.util.Set;
 import java.util.UUID;
 
 @Service
-@Slf4j
 public class AccessTokenService {
     private static final String ROLES_CLAIM = "roles";
     private static final String ID_CLAIM = "id";
