@@ -22,7 +22,7 @@ public class User {
     @Column(updatable = false)
     UUID id;
 
-    @Column(name = "email", nullable = false)
+    @Column(name = "email", nullable = false,unique = true)
     String email;
     @Column(nullable = false)
     String username;
