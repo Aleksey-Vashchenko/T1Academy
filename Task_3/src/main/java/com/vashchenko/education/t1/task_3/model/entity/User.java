@@ -15,6 +15,7 @@ import java.util.UUID;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Setter
 @Getter
+@Table(name = "users_tbl")
 public class User {
 
     @Id
