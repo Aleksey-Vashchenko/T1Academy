@@ -15,6 +15,8 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 
+import static com.vashchenko.education.t1.task_3.service.JwtService.ID_CLAIM;
+
 @Service
 public class RefreshTokenService {
     private final Key jwtKey;
@@ -34,6 +36,7 @@ public class RefreshTokenService {
         final Instant accessExpirationInstant = LocalDateTime.now().plusMinutes(tokenLifetime).atZone(ZoneId.systemDefault()).toInstant();
         String refreshToken = Jwts.builder()
                 .setSubject(user.getUsername())
+                .claim(ID_CLAIM,user.getId())
                 .setExpiration(Date.from(accessExpirationInstant))
                 .signWith(jwtKey)
                 .compact();
