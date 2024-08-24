@@ -4,6 +4,7 @@ import com.vashchenko.education.t1.task_3.exception.UserIsNotFoundException;
 import com.vashchenko.education.t1.task_3.exception.WrongLoginOrPasswordException;
 import com.vashchenko.education.t1.task_3.web.dto.response.ErrorResponse;
 import io.jsonwebtoken.JwtException;
+import org.apache.coyote.BadRequestException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -23,5 +24,10 @@ public class ExceptionHandlerController {
     @ExceptionHandler
     public ResponseEntity<ErrorResponse> wrongLoginOrPasswordException(final WrongLoginOrPasswordException e) {
         return new ResponseEntity<>(new ErrorResponse(e.getMessage()), HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<ErrorResponse> badRequestException(final BadRequestException e) {
+        return new ResponseEntity<>(new ErrorResponse(e.getMessage()), HttpStatus.BAD_REQUEST);
     }
 }

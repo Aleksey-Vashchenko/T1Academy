@@ -1,5 +1,6 @@
 package com.vashchenko.education.t1.task_3.service;
 
+import com.vashchenko.education.t1.task_3.exception.UserAlreadyExistsException;
 import com.vashchenko.education.t1.task_3.exception.UserIsNotFoundException;
 import com.vashchenko.education.t1.task_3.exception.WrongLoginOrPasswordException;
 import com.vashchenko.education.t1.task_3.model.entity.Role;
@@ -10,7 +11,7 @@ import com.vashchenko.education.t1.task_3.web.dto.request.RegistrationRequestDto
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import java.util.Set;
+import java.util.HashSet;
 import java.util.UUID;
 
 @Service
@@ -27,18 +28,23 @@ public class UserService {
         return userRepository.findById(id).orElseThrow(() -> new UserIsNotFoundException(id));
     }
 
-    public void registration(RegistrationRequestDto requestDto) {
+    public void registration(RegistrationRequestDto requestDto){
+        if (userRepository.existsByEmailIgnoreCase(requestDto.email())){
+            throw new UserAlreadyExistsException(requestDto.email());
+        }
         User user = new User();
         user.setEmail(requestDto.email());
         user.setUsername(requestDto.username());
         user.setPasswordHash(passwordEncoder.encode(requestDto.password()));
-        user.setRoles(Set.of(Role.USER));
+        user.setRoles(new HashSet<>(){{add(Role.USER);}});
         userRepository.save(user);
     }
 
     public void updateLevelToAdmin(UserPrincipal userPrincipal) {
         User user = userRepository.findById(userPrincipal.getId()).orElseThrow(() -> new UserIsNotFoundException(userPrincipal.getId()));
-        user.getRoles().add(Role.ADMIN);
-        userRepository.save(user);
+        if (!user.getRoles().contains(Role.ADMIN)){
+            user.addRole(Role.ADMIN);
+            userRepository.save(user);
+        }
     }
 }
