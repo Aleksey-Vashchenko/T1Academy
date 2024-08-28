@@ -29,6 +29,9 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers("/api/v1/authentication/update").authenticated();
                     auth.requestMatchers("/api/v1/authentication/*").permitAll();
+                    auth.requestMatchers("/swagger-ui/index.html").permitAll();
+                    auth.requestMatchers("/v3/api-docs/**").permitAll();
+                    auth.requestMatchers("/swagger-ui/**").permitAll();
                     auth.requestMatchers("/api/v1/resource/public").permitAll();
                     auth.requestMatchers("/api/v1/resource/authenticated").authenticated();
                     auth.anyRequest().authenticated();
