@@ -1,5 +1,6 @@
 package com.vashchenko.education.t1.task_3;
 
+import com.vashchenko.education.t1.task_3.exception.UserAlreadyExistsException;
 import com.vashchenko.education.t1.task_3.service.UserService;
 import com.vashchenko.education.t1.task_3.web.dto.request.RegistrationRequestDto;
 import lombok.RequiredArgsConstructor;
@@ -21,8 +22,8 @@ public class Task3Application {
 
     @Profile("!test")
     @EventListener(ApplicationReadyEvent.class)
-    public void applicationReady(){
-        RegistrationRequestDto requestDto = new RegistrationRequestDto("123","123","123");
+    public void applicationReady() throws UserAlreadyExistsException {
+        RegistrationRequestDto requestDto = new RegistrationRequestDto("1234","1235","123");
         userService.registration(requestDto);
     }
 
