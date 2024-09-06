@@ -1,9 +1,11 @@
 package com.vashchenko.education.t1.task_4.consumer_service.data.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.*;
+import org.hibernate.annotations.UuidGenerator;
 import org.hibernate.proxy.HibernateProxy;
 
 import java.util.Objects;
@@ -15,11 +17,12 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "metric_table")
+@Table(name = "metric_table_kafka")
 public class MetricEvent {
     @Id
+    @UuidGenerator
     UUID id;
-    String from;
+    String sender;
     String message;
 
     @Override

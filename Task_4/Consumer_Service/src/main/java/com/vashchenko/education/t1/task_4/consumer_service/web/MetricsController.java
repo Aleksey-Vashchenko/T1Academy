@@ -14,7 +14,7 @@ import java.util.UUID;
 public class MetricsController {
     private final MetricEventService service;
     @GetMapping("metrics/{id}")
-    public void getMetricById(@PathVariable("id")UUID id){
-//        return service.getMetricEvent(id);
+    public MetricEvent getMetricById(@PathVariable("id")UUID id){
+        return service.getMetricEvent(id);
     }
 }

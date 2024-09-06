@@ -10,11 +10,16 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class KafkaService {
-    @Value("${spring.kafka.topics.metric}")
-    private static String metricTopic;
     private final MetricEventService service;
     @KafkaListener(id="metricGroup",topics = "metricTopic")
-    public void lister(MetricDto metricEvent){
-        System.out.println(metricEvent);
+    public void lister(MetricDto metricDto){
+        service.save(convertToEntity(metricDto));
+    }
+
+    private MetricEvent convertToEntity(MetricDto metricDto){
+        MetricEvent metricEvent = new MetricEvent();
+        metricEvent.setSender(metricDto.getFrom());
+        metricEvent.setMessage(metricDto.getMessage());
+        return metricEvent;
     }
 }
