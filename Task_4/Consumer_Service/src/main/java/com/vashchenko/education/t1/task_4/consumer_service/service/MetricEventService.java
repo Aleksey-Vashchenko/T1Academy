@@ -20,4 +20,12 @@ public class MetricEventService {
     public void save(MetricEvent metricEvent) {
         repository.save(metricEvent);
     }
+
+    public Long getMetricsCount() {
+        return repository.count();
+    }
+
+    public Long getMetricsCountByService(String service){
+        return repository.countBySenderIgnoreCase(service);
+    }
 }

@@ -8,4 +8,5 @@ import java.util.UUID;
 
 @Repository
 public interface MetricEventRepository extends JpaRepository<MetricEvent, UUID> {
+    long countBySenderIgnoreCase(String sender);
 }
