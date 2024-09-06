@@ -37,7 +37,6 @@ public class KafkaConfig {
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,"0.0.0.0:9092");
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringSerializer");
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.ByteArrayDeserializer");
-        props.put(JsonSerializer.TYPE_MAPPINGS, "Metric:com.vashchenko.education.t1.task_4.consumer_service.data.dto.MetricDto)");
         return props;
     }
     @Bean
