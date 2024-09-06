@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: producer
+  kafka:
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      key-serializer: org.springframework.kafka.support.serializer.JsonSerializer

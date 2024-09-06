@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: consumer
+  kafka:
+    topics:
+      metric: metricTopic
+    consumer:
+      value-deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
+      properties:
+        isolation.level: read_committed
+  datasource:
+    username: test
+    password: test
+    url: jdbc:postgresql://localhost:5432/postgres
+    hikari:
+      schema: T1Education
+
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+server:
+  port: 8079
