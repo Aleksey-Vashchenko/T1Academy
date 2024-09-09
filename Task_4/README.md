@@ -19,9 +19,11 @@
 Читает deadMetricTopic и логирует все недошедшие метрики.
 
 
+
 ## Инструкция по запуску
 - Запуск через docker-compose 
 ```bash sh
+mvn compile
 docker-compose up --build
 ```
 

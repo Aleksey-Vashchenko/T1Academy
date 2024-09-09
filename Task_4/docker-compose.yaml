@@ -18,3 +18,17 @@ services:
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - zookeeper
+  producer_service:
+    build: Producer_Service/
+    depends_on:
+      - kafka
+
+  consumer_service:
+    build: Consumer_Service/
+    depends_on:
+      - producer_service
+      - postgres
+  postgres:
+    image: postgres
