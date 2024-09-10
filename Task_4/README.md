@@ -23,7 +23,7 @@
 ## Инструкция по запуску
 - Запуск через docker-compose 
 ```bash sh
-mvn compile
+mvn package -DskipTests=true
 docker-compose up --build
 ```
 
