@@ -24,7 +24,7 @@ public class MetricsController {
     public ResponseEntity<Long> getCount(){
         return new ResponseEntity<>(service.getMetricsCount(), HttpStatus.OK);
     }
-    @GetMapping("metrics/count/{service}}")
+    @GetMapping("metrics/count/{service}")
     public ResponseEntity<Long> getCount(@PathVariable("service") String serviceName){
         return new ResponseEntity<>(service.getMetricsCountByService(serviceName), HttpStatus.OK);
     }

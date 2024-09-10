@@ -8,12 +8,13 @@ spring:
       value-deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
       properties:
         isolation.level: read_committed
+      bootstrap-servers: kafka:9092
   datasource:
     username: test
     password: test
     url: jdbc:postgresql://localhost:5432/postgres
     hikari:
-      schema: T1Education
+      schema: public
 
 
   jpa:

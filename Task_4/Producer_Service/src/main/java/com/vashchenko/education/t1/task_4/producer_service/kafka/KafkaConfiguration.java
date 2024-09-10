@@ -24,23 +24,6 @@ import java.util.Map;
 
 @Configuration
 public class KafkaConfiguration {
-    @Bean
-    public Map<String, Object> producerConfigs() {
-        Map<String, Object> props = new HashMap<>();
-        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,"0.0.0.0:9092");
-        props.put(JsonSerializer.TYPE_MAPPINGS, "Metric:com.vashchenko.education.t1.task_4.producer_service.web.dto.MetricDto");
-        props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringSerializer");
-        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, "org.springframework.kafka.support.serializer.JsonSerializer");
-        return props;
-    }
-    @Bean
-    public ProducerFactory<Object, Object> producerFactory() {
-        return new DefaultKafkaProducerFactory<>(producerConfigs());
-    }
-    @Bean
-    public KafkaTemplate<Object, Object> kafkaTemplate() {
-        return new KafkaTemplate<Object, Object>(producerFactory());
-    }
 
     @Bean
     public CommonErrorHandler errorHandler(KafkaOperations<Object,Object> kafkaOperations){
